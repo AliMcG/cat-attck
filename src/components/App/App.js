@@ -9,7 +9,7 @@ function App() {
     async function fetchBreeds() {
       const response = await fetch(
         `https://api.thecatapi.com/v1/breeds`,
-        { headers: { "x-api-key": "14445d3e-4465-488f-bc69-cd1a6c698a4c" } }
+        { headers: { "x-api-key": process.env.REACT_APP_API_KEY } }
       );
       const data = await response.json();
       setCatId(data.map((cat) => {
@@ -24,7 +24,7 @@ function App() {
       const breedId = catId[Math.floor(Math.random() * catId.length)]
       const response = await fetch(
         `https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`,
-        { headers: { "x-api-key": "14445d3e-4465-488f-bc69-cd1a6c698a4c" } }
+        { headers: { "x-api-key": process.env.REACT_APP_API_KEY } }
       );
       const data = await response.json();
       console.log(data)
