@@ -12,8 +12,20 @@ h1 {
   color: red
 }
 
+img {
+  height: 20rem;
+  width: 20rem;
+}
 
+.cat-display {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 
+.display-box {
+  margin: auto 5rem auto 5rem;
+}
 /* .App-header {
  
   min-height: 100vh;
