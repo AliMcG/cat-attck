@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react"
+import Title from "../Title/Title"
 import './App.css';
 
 function App() {
+  const userName = "Ali"
   const [catId, setCatId] = useState([])
   const [click, setClick] = useState(false)
 
@@ -34,7 +36,7 @@ function App() {
 
   return (
     <div className="App">
-     
+     <Title userName={userName}/>
     </div>
   );
 }
