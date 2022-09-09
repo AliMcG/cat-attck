@@ -2,7 +2,7 @@ import React from "react";
 
 function Title(props) {
   return (
-    <div>
+    <header>
       <h1>Cat Attack!</h1>
       <h2>When cats attack</h2>
       {props.userName ? (
@@ -10,7 +10,7 @@ function Title(props) {
       ) : (
         <h3>Welcome pepare to pit cat against cat!</h3>
       )}
-    </div>
+    </header>
   );
 }
 

@@ -2,30 +2,67 @@ body {
   background-color: #282c34;
 }
 
+header {
+  padding:  0 5rem;
+  margin: 0 auto;
+}
+
+header h1 {
+  color: red;
+  padding: 0 auto;
+  margin: 0 auto;
+}
+
+header h2 {
+  color: red;
+  padding: 0 auto;
+  margin: 0 auto;
+}
+
 .App {
   text-align: center;
   color: white;
   font-size: calc(10px + 2vmin);
 }
-
-h1 {
-  color: red
-}
-
-img {
-  height: 20rem;
-  width: 20rem;
-}
+/* .bg {
+  background-repeat: no-repeat;
+  background-position: "center";
+  min-Height: 100vh;
+  min-Width: 100vw;
+  background-attachment: fixed;
+  background-image: url("../../images/claws.jpg");
+} */
 
 .cat-display {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  /* border: 5px solid red; */
+  margin: auto;
+  width: 60%
 }
 
-.display-box {
-  margin: auto 5rem auto 5rem;
+.cat-display img {
+  border: 5px solid red;
+  margin: 2rem 0rem 0rem 2rem;
+  height: 15rem;
+  width: 15rem;
 }
+
+.cat-display p {
+  margin-top: 0rem;
+}
+
+.verus {
+  padding-top: 4.5rem;
+  height: 5rem !important;
+  width: 5rem !important;
+  border: 5px solid #282c34 !important;
+
+  /* transform: rotate(-20deg) */
+}
+
+
 /* .App-header {
  
   min-height: 100vh;
@@ -37,6 +74,31 @@ img {
   color: white;
 } */
 
-
+@media only screen and (max-width: 800px) {
+  /* body {
+    background-color: lightblue;
+  } */
+  .cat-display {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* border: 5px solid red; */
+    margin: auto;
+    width: 60%
+  }
+  .cat-display img {
+    border: 5px solid red;
+    margin: 1rem 0rem;
+    height: 15rem;
+    width: 15rem;
+  }
+  .verus {
+    /* padding-top: 4.5rem; */
+    height: 5rem !important;
+    width: 5rem !important;
+    border: 5px solid #282c34 !important;
+    /* transform: rotate(-20deg) */
+  }
+}
 
 
