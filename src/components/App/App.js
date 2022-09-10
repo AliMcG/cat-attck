@@ -36,8 +36,8 @@ function App() {
         })
       );
       setClick("true");
-      // fetchCatByIdOne();
-      // fetchCatByIdTwo();
+      fetchCatByIdOne();
+      fetchCatByIdTwo();
     }
     async function fetchCatByIdOne() {
       // Takes a random breedId from the catId array of names.
