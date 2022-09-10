@@ -1,10 +1,11 @@
 import React from "react"
-import listAttributes from "../../catAttributes"
+
 
 function Question(props) {
+  
   return ( 
     <section>
-      <p>Which cat is more {"atrribute"}?</p>
+      <p>Which cat's {props.attribute} attribute is greater?</p>
     </section>
    );
 }

@@ -4,6 +4,7 @@ import Display from "../Display/Display";
 import verus from "../../images/versus-icon.svg";
 import EmptyImage from "../EmptyImage/emptyImage";
 import Question from "../Question/Question";
+import { listAttributes, listAttributesObjects } from "../../catAttributes"
 import "./App.css";
 
 function App() {
@@ -12,6 +13,8 @@ function App() {
   const [click, setClick] = useState(false);
   const [cat1, setCat1] = useState("");
   const [cat2, setCat2] = useState("");
+  const [attribute, setAttribute] = useState(listAttributes[Math.floor(Math.random() * listAttributes.length)] )
+
 
   useEffect(() => {
     async function fetchBreeds() {
@@ -55,8 +58,22 @@ function App() {
   }, [click]);
 
   function checkAnswer(){
-    console.log("I was clicked")
+    // get current attribute from attribute state.
+    // compare which cat's is greater 
+    // return the cat with the greater level
+
+    const testCat = cat2[0].breeds[0][attribute]
+    console.log(attribute)
+    console.log(testCat)
+    // if (cat1[0].breeds[0].attribute > ){
+    //   console.log(`cat1 = ${cat1}`)
+    // } else {
+    //   console.log("cat2")
+    // }
+    
   }
+
+  console.log(attribute)
 
   return (
     <div className="App">
@@ -75,7 +92,7 @@ function App() {
             <EmptyImage />
           )}
         </div>
-        <Question />
+        <Question attribute={attribute}/>
       </div>
     </div>
   );
