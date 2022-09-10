@@ -4,7 +4,7 @@ function Display(props) {
   return (
     <div className="display-box">
       <img className="cat-img" src={props.url} alt="" />
-      <p>{props.name}</p>
+      <p onClick={props.onClick}>{props.name}</p>
     </div>
   );
 }

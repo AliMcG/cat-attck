@@ -51,6 +51,7 @@ header h2 {
 
 .cat-display p {
   margin-top: 0rem;
+  cursor: pointer;
 }
 
 .verus {

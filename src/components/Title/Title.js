@@ -10,6 +10,7 @@ function Title(props) {
       ) : (
         <h3>Welcome pepare to pit cat against cat!</h3>
       )}
+      <p>Each round will pit cat agianst cat based on a random attribute</p>
     </header>
   );
 }

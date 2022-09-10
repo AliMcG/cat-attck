@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Title from "../Title/Title";
 import Display from "../Display/Display";
-import verus from "../../images/versus-icon.svg"
+import verus from "../../images/versus-icon.svg";
 import EmptyImage from "../EmptyImage/emptyImage";
+import Question from "../Question/Question";
 import "./App.css";
 
 function App() {
@@ -53,15 +54,28 @@ function App() {
     fetchBreeds();
   }, [click]);
 
+  function checkAnswer(){
+    console.log("I was clicked")
+  }
+
   return (
     <div className="App">
-      <div className='bg'>
-      <Title userName={userName} />
-      <div className="cat-display">
-        {cat1 ? <Display url={cat1[0].url} name={cat1[0].breeds[0].name} />: <EmptyImage />}
-        <img className="verus" src={verus} alt="" />
-        {cat2 ? <Display url={cat2[0].url} name={cat2[0].breeds[0].name} />: <EmptyImage />}
-      </div>
+      <div className="bg">
+        <Title userName={userName} />
+        <div className="cat-display">
+          {cat1 ? (
+            <Display url={cat1[0].url} onClick={checkAnswer} name={cat1[0].breeds[0].name} />
+          ) : (
+            <EmptyImage />
+          )}
+          <img className="verus" src={verus} alt="" />
+          {cat2 ? (
+            <Display url={cat2[0].url} onClick={checkAnswer} name={cat2[0].breeds[0].name} />
+          ) : (
+            <EmptyImage />
+          )}
+        </div>
+        <Question />
       </div>
     </div>
   );
