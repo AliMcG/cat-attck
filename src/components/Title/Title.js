@@ -1,5 +1,6 @@
 import React from "react";
 
+// to introduce the game with a username?
 function Title(props) {
   return (
     <header>
