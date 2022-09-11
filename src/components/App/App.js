@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Title from "../Title/Title";
 import Display from "../Display/Display";
 import verus from "../../images/versus-icon.svg";
@@ -11,7 +11,8 @@ import Scoreboard from "../Scoreboard";
 import "./App.css";
 
 function App() {
-  const userName = "{userName}";
+  const userName = false;
+  const buttonRef = useRef(null);
   const [catId, setCatId] = useState([]);
   const [reset, setReset] = useState("");
   const [cat1, setCat1] = useState("");
@@ -22,7 +23,7 @@ function App() {
   const [attribute, setAttribute] = useState(
     listAttributes[Math.floor(Math.random() * listAttributes.length)]
   );
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     async function fetchBreeds() {
@@ -52,8 +53,8 @@ function App() {
       const data = await response.json();
       // checks the data exists
       console.log(data[0].breeds[0].name);
+      console.log(data[0].breeds[0][attribute]);
       setCat1(data);
-      console.log(cat1[0].breeds[0][attribute])
     }
     async function fetchCatByIdTwo() {
       const breedId = catId[Math.floor(Math.random() * catId.length)];
@@ -63,13 +64,13 @@ function App() {
       );
       const data = await response.json();
       console.log(data[0].breeds[0].name);
+      console.log(data[0].breeds[0][attribute]);
       setCat2(data);
-      console.log(cat2[0].breeds[0][attribute])
     }
     fetchBreeds();
   }, [reset]);
 
-  function checkAnswer(name) {
+  function checkAnswer(event) {
     // get current attribute from attribute state.
     const catOne = cat1[0].breeds[0][attribute];
     const catTwo = cat2[0].breeds[0][attribute];
@@ -77,22 +78,28 @@ function App() {
     // compares which cat's value is greater and
     // returns the cat with the greater value or returns a draw.
     if (catOne > catTwo) {
-      console.log(cat1[0].breeds[0].name);
-      
       setAnswer(cat1[0].breeds[0].name);
-    } else if (catOne === catTwo) {
-      console.log("Draw");
-      setAnswer("Draw, neither cat");
-    } else {
-      console.log(cat2[0].breeds[0].name);
-      setAnswer(cat2[0].breeds[0].name);
-    }
-    if (name.target.innerText === answer) {
-      console.log(name.target.innerText, answer);
-      setScore(score + 1);
-      // setAnswer("")
-    }
 
+      // This stops spam clicking on button
+      buttonRef.current.disabled = true;
+      if (event.target.innerText === answer) {
+        setScore(score + 1);
+      }
+    } else if (catOne === catTwo) {
+      const arrCats = [cat1[0].breeds[0].name, cat2[0].breeds[0].name];
+
+      setAnswer(arrCats[Math.floor(Math.random() * arrCats.length)]);
+      buttonRef.current.disabled = true;
+      if (event.target.innerText === answer) {
+        setScore(score + 1);
+      }
+    } else {
+      setAnswer(cat2[0].breeds[0].name);
+      buttonRef.current.disabled = true;
+      if (event.target.innerText === answer) {
+        setScore(score + 1);
+      }
+    }
   }
   // uses the set-SomeValue functions to re-set the game
   function playAgain() {
@@ -101,41 +108,42 @@ function App() {
     setAttribute(
       listAttributes[Math.floor(Math.random() * listAttributes.length)]
     );
+    buttonRef.current.disabled = false;
   }
 
   return (
     <div className="App">
-      <div className="bg">
-        <Title userName={userName} />
-        <div className="cat-display">
-          {cat1 ? (
-            <Display
-              url={cat1[0].url}
-              onClick={checkAnswer}
-              name={cat1[0].breeds[0].name}
-            />
-          ) : (
-            <EmptyImage />
-          )}
-          <img className="verus" src={verus} alt="" />
-          {cat2 ? (
-            <Display
-              url={cat2[0].url}
-              onClick={checkAnswer}
-              name={cat2[0].breeds[0].name}
-            />
-          ) : (
-            <EmptyImage />
-          )}
-        </div>
-        {!answer ? (
-          <Question attribute={attribute} />
+      <Title userName={userName} />
+      {!answer ? (
+        <Question attribute={attribute} />
+      ) : (
+        <AnswerDisplay answer={answer} attribute={attribute} />
+      )}
+      <div className="cat-display">
+        {cat1 ? (
+          <Display
+            url={cat1[0].url}
+            ref={buttonRef}
+            onClick={checkAnswer}
+            name={cat1[0].breeds[0].name}
+          />
         ) : (
-          <AnswerDisplay answer={answer} attribute={attribute} />
+          <EmptyImage />
         )}
-        <Scoreboard score={score} />
-        <PlayAgainButton onClick={playAgain} />
+        <img className="verus" src={verus} alt="" />
+        {cat2 ? (
+          <Display
+            url={cat2[0].url}
+            ref={buttonRef}
+            onClick={checkAnswer}
+            name={cat2[0].breeds[0].name}
+          />
+        ) : (
+          <EmptyImage />
+        )}
       </div>
+      <Scoreboard score={score} />
+      <PlayAgainButton onClick={playAgain} />
     </div>
   );
 }

@@ -47,11 +47,12 @@ header h2 {
   margin: 2rem 0rem 0rem 2rem;
   height: 15rem;
   width: 15rem;
+  cursor: pointer;
 }
 
 .cat-display p {
   margin-top: 0rem;
-  cursor: pointer;
+  
 }
 
 .play-again {
@@ -84,8 +85,8 @@ the values below over-ride the values given the code above. */
   .cat-display img {
     border: 5px solid red;
     margin: 0rem 0rem;
-    height: 15rem;
-    width: 15rem;
+    height: 10rem;
+    width: 10rem;
   }
 
   .play-again {
@@ -97,8 +98,8 @@ the values below over-ride the values given the code above. */
   .verus {
     padding-top: 0rem;
     padding-bottom: 1rem;
-    height: 5rem !important;
-    width: 5rem !important;
+    height: 3rem !important;
+    width: 3rem !important;
     border: 5px solid #282c34 !important;
     align-self: center;
   }
