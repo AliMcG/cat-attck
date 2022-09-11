@@ -4,7 +4,7 @@ import Display from "../Display/Display";
 import verus from "../../images/versus-icon.svg";
 import EmptyImage from "../EmptyImage/emptyImage";
 import Question from "../Question/Question";
-import listAttributes from "../../catAttributes.js";
+import listAttributes from "../../Data/catAttributes.js";
 import AnswerDisplay from "../AnswerDisplay";
 import PlayAgainButton from "../PlayAgainButton.js";
 import Scoreboard from "../Scoreboard";
@@ -13,7 +13,7 @@ import "./App.css";
 function App() {
   const userName = "{userName}";
   const [catId, setCatId] = useState([]);
-  const [click, setClick] = useState("");
+  const [reset, setReset] = useState("");
   const [cat1, setCat1] = useState("");
   const [cat2, setCat2] = useState("");
   // answer and click both use "falsey" initial values to help with conditional rendering.
@@ -37,7 +37,7 @@ function App() {
           return cat.id;
         })
       );
-      setClick("true");
+      setReset("true");
       fetchCatByIdOne();
       fetchCatByIdTwo();
     }
@@ -53,6 +53,7 @@ function App() {
       // checks the data exists
       console.log(data[0].breeds[0].name);
       setCat1(data);
+      console.log(cat1[0].breeds[0][attribute])
     }
     async function fetchCatByIdTwo() {
       const breedId = catId[Math.floor(Math.random() * catId.length)];
@@ -63,9 +64,10 @@ function App() {
       const data = await response.json();
       console.log(data[0].breeds[0].name);
       setCat2(data);
+      console.log(cat2[0].breeds[0][attribute])
     }
     fetchBreeds();
-  }, [click]);
+  }, [reset]);
 
   function checkAnswer(name) {
     // get current attribute from attribute state.
@@ -76,6 +78,7 @@ function App() {
     // returns the cat with the greater value or returns a draw.
     if (catOne > catTwo) {
       console.log(cat1[0].breeds[0].name);
+      
       setAnswer(cat1[0].breeds[0].name);
     } else if (catOne === catTwo) {
       console.log("Draw");
@@ -87,12 +90,13 @@ function App() {
     if (name.target.innerText === answer) {
       console.log(name.target.innerText, answer);
       setScore(score + 1);
+      // setAnswer("")
     }
 
   }
   // uses the set-SomeValue functions to re-set the game
   function playAgain() {
-    setClick("false");
+    setReset("false");
     setAnswer("");
     setAttribute(
       listAttributes[Math.floor(Math.random() * listAttributes.length)]
