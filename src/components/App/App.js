@@ -4,9 +4,10 @@ import Display from "../Display/Display";
 import verus from "../../images/versus-icon.svg";
 import EmptyImage from "../EmptyImage/emptyImage";
 import Question from "../Question/Question";
-import { listAttributes } from "../../catAttributes";
+import listAttributes from "../../catAttributes.js";
 import AnswerDisplay from "../AnswerDisplay";
 import PlayAgainButton from "../PlayAgainButton.js";
+import Scoreboard from "../Scoreboard";
 import "./App.css";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
   const [attribute, setAttribute] = useState(
     listAttributes[Math.floor(Math.random() * listAttributes.length)]
   );
+  const [score, setScore] = useState(0)
 
   useEffect(() => {
     async function fetchBreeds() {
@@ -65,7 +67,7 @@ function App() {
     fetchBreeds();
   }, [click]);
 
-  function checkAnswer() {
+  function checkAnswer(name) {
     // get current attribute from attribute state.
     const catOne = cat1[0].breeds[0][attribute];
     const catTwo = cat2[0].breeds[0][attribute];
@@ -82,6 +84,11 @@ function App() {
       console.log(cat2[0].breeds[0].name);
       setAnswer(cat2[0].breeds[0].name);
     }
+    if (name.target.innerText === answer) {
+      console.log(name.target.innerText, answer);
+      setScore(score + 1);
+    }
+
   }
   // uses the set-SomeValue functions to re-set the game
   function playAgain() {
@@ -122,6 +129,7 @@ function App() {
         ) : (
           <AnswerDisplay answer={answer} attribute={attribute} />
         )}
+        <Scoreboard score={score} />
         <PlayAgainButton onClick={playAgain} />
       </div>
     </div>
