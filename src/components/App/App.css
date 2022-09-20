@@ -5,6 +5,7 @@ body {
 header {
   padding: 0 5rem;
   margin: 0 auto;
+  
 }
 
 header h1 {
@@ -13,8 +14,14 @@ header h1 {
   margin: 0 auto;
 }
 
-header h2 {
+header h3 {
   color: red;
+  padding: 0 auto;
+  margin: 0 auto;
+}
+
+header p {
+  /* text-align: justify; */
   padding: 0 auto;
   margin: 0 auto;
 }
@@ -74,6 +81,12 @@ the values below over-ride the values given the code above. */
   /* body {
     background-color: lightblue;
   } */
+
+  header p {
+    text-align: justify;
+    padding: 0 auto;
+    margin: 0 auto;
+  }
 
   .cat-display {
     display: flex;

@@ -1,8 +1,10 @@
 import React from "react";
 
-// a simple button component to hanlde the onClick function to play again.
-function PlayAgain(props) {
-  return <button className="play-again" onClick={props.onClick}>Click to Fight Again!</button>;
+// to use useRef in component React.forwardRef is needed
+// a simple button component to handle the onClick function to play again.
+const PlayAgain = ((props) => {
+  return <button disabled={props.state ? true : false} className="play-again" onClick={props.onClick}>{props.text}</button>;
 }
+)
 
-export default PlayAgain;
+export default PlayAgain
