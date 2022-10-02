@@ -1,5 +1,8 @@
 body {
-  background-color: #282c34;
+  /* background-color: #282c34; */
+  background-color: #575a51;
+  background-image: url("https://www.transparenttextures.com/patterns/gun-metal.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
 header {
@@ -19,6 +22,18 @@ header h3 {
   padding: 0 auto;
   margin: 0 auto;
 }
+
+/* .modal  {
+  position: 'absolute';
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background-color: 'background.paper';
+  border: '2px solid white';
+  box-shadow: 10px;
+  p: 4;
+}; */
 
 header p {
   /* text-align: justify; */
@@ -67,11 +82,29 @@ header p {
   color: red;
 }
 
+.top-button {
+  position: relative;
+  left: 6rem;
+  height: 3rem;
+  width: 10rem;
+  top: 2rem;
+  text-overflow: inherit;
+  /* top: 10rem; */
+}
+
+.bottom-button {
+  position: relative;
+  height: 3rem;
+  width: 10rem;
+  right: 4rem;
+  top: 15rem;
+}
+
 .verus {
   padding-top: 4.5rem;
   height: 5rem !important;
   width: 5rem !important;
-  border: 5px solid #282c34 !important;
+  border: 0px !important;
 }
 
 /* The values below only happen on screens sizes less than 800px
@@ -113,7 +146,7 @@ the values below over-ride the values given the code above. */
     padding-bottom: 1rem;
     height: 3rem !important;
     width: 3rem !important;
-    border: 5px solid #282c34 !important;
+    border: 0px ;
     align-self: center;
   }
 }

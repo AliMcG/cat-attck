@@ -9,6 +9,8 @@ import AnswerDisplay from "../AnswerDisplay";
 import PlayAgainButton from "../PlayAgainButton.js";
 import Scoreboard from "../Scoreboard";
 import { catOne, catTwo } from "../../Data/catData";
+import InstructionsModal from "../../modals/gameInstructionsModal";
+import useFetch from "../../hooks/useFetch";
 import "./App.css";
 
 function App() {
@@ -26,6 +28,19 @@ function App() {
   const [attribute, setAttribute] = useState("???????");
   const [score, setScore] = useState(0);
 
+  // function setBreed() {
+  //   const breeds = useFetch(`https://api.thecatapi.com/v1/breeds`, {
+  //     headers: { "x-api-key": process.env.REACT_APP_API_KEY },
+  //   });
+  //   console.log(breeds);
+  //   setCatId(
+  //     breeds.map((cat) => {
+  //       return cat.id;
+  //     })
+  //   );
+  // };
+
+  // const breedId = catId[Math.floor(Math.random() * catId.length)];
   // useEffect(() => {
   // async function fetchBreeds() {
   //   // fetches a list of all breeds from the api.
@@ -83,7 +98,6 @@ function App() {
     if (catOne > catTwo) {
       setAnswer(cat1[0].breeds[0].name);
 
-      
       buttonRef.current.disabled = true;
       if (event.target.innerText === answer) {
         setScore(score + 1);
@@ -125,7 +139,8 @@ function App() {
   return (
     <div className="App">
       <Title userName={userName} />
-      <PlayAgainButton state={reset} text="Click to Play" onClick={playRound} />
+      <InstructionsModal />
+      
       <Scoreboard score={score} />
       {!answer ? (
         <Question attribute={attribute} />
@@ -143,7 +158,9 @@ function App() {
         ) : (
           <EmptyImage />
         )}
+        <PlayAgainButton class="top-button" state={reset} text="Click to Play" onClick={playRound} />
         <img className="verus" src={verus} alt="" />
+        <PlayAgainButton class="bottom-button" text="Play next round" onClick={playAgain} />
         {cat2 ? (
           <Display
             url={cat2[0].url}
@@ -156,7 +173,7 @@ function App() {
         )}
       </div>
 
-      <PlayAgainButton text="Play next round" onClick={playAgain} />
+      
     </div>
   );
 }
