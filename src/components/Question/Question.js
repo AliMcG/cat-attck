@@ -1,9 +1,10 @@
+import { blue } from "@mui/material/colors";
 import React from "react";
 
 function Question(props) {
   return (
     <section>
-      <p>Which cat's {props.attribute} attribute is greater?</p>
+      <p>Which cat's <span style={{color: "blue"}}>{props.attribute}</span> attribute is greater?</p>
     </section>
   );
 }
