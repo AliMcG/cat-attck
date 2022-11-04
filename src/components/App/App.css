@@ -83,15 +83,15 @@ header p {
 }
 
 .top-button {
-  position: relative;
+  /* position: relative;
   left: 6rem;
+  
+  text-overflow: inherit;
+  top: 2rem; */
   height: 3rem;
   width: 10rem;
-  top: 2rem;
-  text-overflow: inherit;
-  /* top: 10rem; */
 }
-
+ 
 .bottom-button {
   position: relative;
   height: 3rem;
@@ -108,7 +108,7 @@ header p {
 }
 
 /* The values below only happen on screens sizes less than 800px
-the values below over-ride the values given the code above. */
+the values below over-ride the values given in the code above. */
 @media only screen and (max-width: 800px) {
   /*Use this background to help see the screen change */
   /* body {

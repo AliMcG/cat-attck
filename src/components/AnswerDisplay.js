@@ -1,10 +1,10 @@
 import React from "react";
 
-// to display the answer and the attributed used in the question
+// to display the answer and the attribute used in the question
 function AnswerDisplay(props) {
   return (
     <p>
-      {props.answer} was more {props.attribute}
+      {props.answer}'s <span style={{color: "blue"}}>{props.attribute}</span> attribute was greater.
     </p>
   );
 }
