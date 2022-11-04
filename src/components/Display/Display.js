@@ -4,11 +4,11 @@ import verus from "../../images/versus-icon.svg";
 import EmptyImage from "../EmptyImage/emptyImage";
 import Question from "../Question/Question";
 import AnswerDisplay from "../AnswerDisplay";
-// import PlayAgainButton from "../PlayAgainButton.js";
+
 import Scoreboard from "../Scoreboard";
 
 // to use useRef in component React.forwardRef is needed
-const Display = React.forwardRef(({ cat1, cat2, checkAnswer, answer, score, attribute}) => (
+const Display = React.forwardRef(({ cat1, cat2, checkAnswer, answer, score, attribute}, ref) => (
   <>
   <Scoreboard score={score} />
   {!answer ? (

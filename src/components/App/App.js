@@ -1,17 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import Title from "../Title/Title";
 import Display from "../Display/Display";
-import Question from "../Question/Question";
+
 import listAttributes from "../../Data/catAttributes.js";
-import AnswerDisplay from "../AnswerDisplay";
+
 import PlayAgainButton from "../PlayAgainButton.js";
-import Scoreboard from "../Scoreboard";
-// import { catOne, catTwo } from "../../Data/catData";
+
 import InstructionsModal from "../../modals/gameInstructionsModal";
 import "./App.css";
 
 function App() {
-  // const buttonRef = useRef(null);
+  const buttonRef = useRef(null);
   // const playButtonRef = useRef(null);
   const [round, setRound] = useState(1);
   const [breedsId, setBreedsId] = useState([]);
