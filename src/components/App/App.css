@@ -83,12 +83,13 @@ header p {
 }
 
 .top-button {
-  position: relative;
+  /* position: relative;
   left: 6rem;
+  
+  text-overflow: inherit;
+  top: 2rem; */
   height: 3rem;
   width: 10rem;
-  text-overflow: inherit;
-  top: 2rem;
 }
  
 .bottom-button {
