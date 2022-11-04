@@ -28,19 +28,39 @@ function App() {
   const [attribute, setAttribute] = useState("???????");
   const [score, setScore] = useState(0);
 
-  // function setBreed() {
-  //   const breeds = useFetch(`https://api.thecatapi.com/v1/breeds`, {
-  //     headers: { "x-api-key": process.env.REACT_APP_API_KEY },
-  //   });
-  //   console.log(breeds);
-  //   setCatId(
-  //     breeds.map((cat) => {
-  //       return cat.id;
-  //     })
-  //   );
-  // };
+  
 
-  // const breedId = catId[Math.floor(Math.random() * catId.length)];
+  useEffect(() => {
+    // fetches a list of all breeds from the api.
+    async function getBreedIds() {
+      const response = await fetch(`https://api.thecatapi.com/v1/breeds`, {
+        headers: { "x-api-key": process.env.REACT_APP_API_KEY },
+      });
+      const data = await response.json();
+      console.log(data);
+
+      // maps the breed names into a new array.
+      const breedsIds = data.map((cat) => {
+        return cat.id
+      })
+      const randomBreedId = breedsIds[Math.floor(Math.random() * breedsIds.length)];
+    }
+    getBreedIds();
+  }, []);
+
+  function SetBreed() {
+    const breeds = useFetch(`https://api.thecatapi.com/v1/breeds`, {
+      headers: { "x-api-key": process.env.REACT_APP_API_KEY },
+    });
+    console.log(breeds);
+    setCatId(
+      breeds.map((cat) => {
+        return cat.id;
+      })
+    );
+  }
+
+  //
   // useEffect(() => {
   // async function fetchBreeds() {
   //   // fetches a list of all breeds from the api.
@@ -140,7 +160,7 @@ function App() {
     <div className="App">
       <Title userName={userName} />
       <InstructionsModal />
-      
+
       <Scoreboard score={score} />
       {!answer ? (
         <Question attribute={attribute} />
@@ -158,9 +178,18 @@ function App() {
         ) : (
           <EmptyImage />
         )}
-        <PlayAgainButton class="top-button" state={reset} text="Click to Play" onClick={playRound} />
+        <PlayAgainButton
+          class="top-button"
+          state={reset}
+          text="Click to Play"
+          onClick={playRound}
+        />
         <img className="verus" src={verus} alt="" />
-        <PlayAgainButton class="bottom-button" text="Play next round" onClick={playAgain} />
+        <PlayAgainButton
+          class="bottom-button"
+          text="Play next round"
+          onClick={playAgain}
+        />
         {cat2 ? (
           <Display
             url={cat2[0].url}
@@ -172,8 +201,6 @@ function App() {
           <EmptyImage />
         )}
       </div>
-
-      
     </div>
   );
 }

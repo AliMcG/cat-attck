@@ -1,4 +1,3 @@
-import { blue } from "@mui/material/colors";
 import React from "react";
 
 function Question(props) {
