@@ -13,12 +13,13 @@ import InstructionsModal from "../../modals/gameInstructionsModal";
 import useFetch from "../../hooks/useFetch";
 import "./App.css";
 
+
 function App() {
   const userName = false;
   const buttonRef = useRef(null);
   const playButtonRef = useRef(null);
   const [round, setRound] = useState(1);
-  const [catId, setCatId] = useState([]);
+  const [breedsId, setBreedsId] = useState([]);
   const [reset, setReset] = useState(false);
   const [cat1, setCat1] = useState("");
   const [cat2, setCat2] = useState("");
@@ -28,56 +29,30 @@ function App() {
   const [attribute, setAttribute] = useState("???????");
   const [score, setScore] = useState(0);
 
-  
-
+ 
   useEffect(() => {
     // fetches a list of all breeds from the api.
+    // This is used to to do a random search by id for each round of the game
     async function getBreedIds() {
       const response = await fetch(`https://api.thecatapi.com/v1/breeds`, {
         headers: { "x-api-key": process.env.REACT_APP_API_KEY },
       });
       const data = await response.json();
-      console.log(data);
-
+    
       // maps the breed names into a new array.
-      const breedsIds = data.map((cat) => {
+      const breedsIdList = data.map((cat) => {
         return cat.id
       })
-      const randomBreedId = breedsIds[Math.floor(Math.random() * breedsIds.length)];
+      setBreedsId((previousValue) => breedsIdList)
+      // const randomBreedId = breedsIds[Math.floor(Math.random() * breedsIds.length)];
     }
     getBreedIds();
-  }, []);
+    }, []);
 
-  function SetBreed() {
-    const breeds = useFetch(`https://api.thecatapi.com/v1/breeds`, {
-      headers: { "x-api-key": process.env.REACT_APP_API_KEY },
-    });
-    console.log(breeds);
-    setCatId(
-      breeds.map((cat) => {
-        return cat.id;
-      })
-    );
-  }
+  
+  
 
-  //
-  // useEffect(() => {
-  // async function fetchBreeds() {
-  //   // fetches a list of all breeds from the api.
-  //   const response = await fetch(`https://api.thecatapi.com/v1/breeds`, {
-  //     headers: { "x-api-key": process.env.REACT_APP_API_KEY },
-  //   });
-  //   const data = await response.json();
-  //   // maps the breed names into a new array inside the catID state.
-  //   setCatId(
-  //     data.map((cat) => {
-  //       return cat.id;
-  //     })
-  //   );
-  //   setReset("true");
-  //   fetchCatByIdOne();
-  //   fetchCatByIdTwo();
-  // }
+ 
   //   async function fetchCatByIdOne() {
   //     // Takes a random breedId from the catId array of names.
   //     // Makes a GET request to get the cat image and breed info for the one cat.
