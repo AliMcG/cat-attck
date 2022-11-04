@@ -8,9 +8,9 @@ import listAttributes from "../../Data/catAttributes.js";
 import AnswerDisplay from "../AnswerDisplay";
 import PlayAgainButton from "../PlayAgainButton.js";
 import Scoreboard from "../Scoreboard";
-import { catOne, catTwo } from "../../Data/catData";
+// import { catOne, catTwo } from "../../Data/catData";
 import InstructionsModal from "../../modals/gameInstructionsModal";
-import useFetch from "../../hooks/useFetch";
+
 import "./App.css";
 
 
@@ -50,36 +50,40 @@ function App() {
     }, []);
 
   
+  useEffect(() => {
+    async function fetchCatByIdOne() {
+      // Takes a random breedId from the catId array of names.
+      // Makes a GET request to get the cat image and breed info for the one cat.
+      const breedId = breedsId[Math.floor(Math.random() * breedsId.length)];
+      const response = await fetch(
+        `https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`,
+        { headers: { "x-api-key": process.env.REACT_APP_API_KEY } }
+      );
+      const data = await response.json();
+      // checks the data exists
+      console.log(data)
+      console.log(data[0].breeds[0].name);
+      // console.log(data[0].breeds[0][attribute]);
+      setCat1(data);
+    }
+    async function fetchCatByIdTwo() {
+      const breedId = breedsId[Math.floor(Math.random() * breedsId.length)];
+      const response = await fetch(
+        `https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`,
+        { headers: { "x-api-key": process.env.REACT_APP_API_KEY } }
+      );
+      const data = await response.json();
+      console.log(data[0].breeds[0].name);
+      // console.log(data[0].breeds[0][attribute]);
+      setCat2(data);
+    }
+    fetchCatByIdOne()
+    fetchCatByIdTwo()
+  }, [reset]);
   
 
  
-  //   async function fetchCatByIdOne() {
-  //     // Takes a random breedId from the catId array of names.
-  //     // Makes a GET request to get the cat image and breed info for the one cat.
-  //     const breedId = catId[Math.floor(Math.random() * catId.length)];
-  //     const response = await fetch(
-  //       `https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`,
-  //       { headers: { "x-api-key": process.env.REACT_APP_API_KEY } }
-  //     );
-  //     const data = await response.json();
-  //     // checks the data exists
-  //     console.log(data[0].breeds[0].name);
-  //     console.log(data[0].breeds[0][attribute]);
-  //     setCat1(data);
-  //   }
-  //   async function fetchCatByIdTwo() {
-  //     const breedId = catId[Math.floor(Math.random() * catId.length)];
-  //     const response = await fetch(
-  //       `https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`,
-  //       { headers: { "x-api-key": process.env.REACT_APP_API_KEY } }
-  //     );
-  //     const data = await response.json();
-  //     console.log(data[0].breeds[0].name);
-  //     console.log(data[0].breeds[0][attribute]);
-  //     setCat2(data);
-  //   }
-  //   fetchBreeds();
-  // }, [reset]);
+    
 
   function checkAnswer(event) {
     // This stops spam clicking on button
@@ -117,8 +121,10 @@ function App() {
     setAttribute(
       listAttributes[Math.floor(Math.random() * listAttributes.length)]
     );
-    setCat1(catOne);
-    setCat2(catTwo);
+    
+    
+    // setCat1(catOne);
+    // setCat2(catTwo);
     setReset(true);
   }
   // uses the set-SomeValue functions to re-set the game
@@ -133,7 +139,7 @@ function App() {
 
   return (
     <div className="App">
-      <Title userName={userName} />
+      <Title />
       <InstructionsModal />
 
       <Scoreboard score={score} />
@@ -142,40 +148,16 @@ function App() {
       ) : (
         <AnswerDisplay answer={answer} attribute={attribute} />
       )}
-      <div className="cat-display">
-        {cat1 ? (
-          <Display
-            url={cat1[0].url}
-            ref={buttonRef}
-            onClick={checkAnswer}
-            name={cat1[0].breeds[0].name}
-          />
-        ) : (
-          <EmptyImage />
-        )}
-        <PlayAgainButton
+     
+        {/* <PlayAgainButton
           class="top-button"
           state={reset}
           text="Click to Play"
-          onClick={playRound}
-        />
-        <img className="verus" src={verus} alt="" />
-        <PlayAgainButton
-          class="bottom-button"
-          text="Play next round"
-          onClick={playAgain}
-        />
-        {cat2 ? (
-          <Display
-            url={cat2[0].url}
-            ref={buttonRef}
-            onClick={checkAnswer}
-            name={cat2[0].breeds[0].name}
-          />
-        ) : (
-          <EmptyImage />
-        )}
-      </div>
+          onClick={playRound} */}
+        {/* /> */}
+       
+        <Display cat1={cat1} cat2={cat2} checkAnswer={checkAnswer}/>
+     
     </div>
   );
 }
