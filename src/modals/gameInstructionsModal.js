@@ -17,6 +17,12 @@ const style = {
   p: 4,
 };
 
+const buttonStyle = {
+  color: "red",
+  fontSize: "xx-large",
+  fontWeight: "bold",
+}
+
 export default function InstructionsModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -24,7 +30,7 @@ export default function InstructionsModal() {
 
   return (
     <div>
-      <Button onClick={handleOpen} style={{color: "red"}}>How to Play</Button>
+      <Button onClick={handleOpen} style={buttonStyle}>How to Play</Button>
       <Modal
         open={open}
         onClose={handleClose}
